@@ -1,0 +1,60 @@
+//Middle Node insert
+
+#include <bits/stdc++.h>
+using namespace std;
+
+    struct node
+    {
+        int data;
+        node* next;
+    };
+void printList(node *n)
+{
+    int count=0;
+    while(n!=0)
+    {
+        cout<<n->data<<" ";
+        n = n->next;
+        count++;
+    }
+    cout<<endl<<"Number of Element in list is: "<<count<<endl;
+}
+
+//node *push(node *head, int newData)
+//{
+//     node* newnode = new node();
+//     newnode->data = newData;
+//     newnode->next = head;
+//     head = newnode;
+//     return head;
+//}
+
+void push(node **head_ref, int newData)
+{
+     node* newnode = new node();
+     newnode->data = newData;
+     newnode->next = *head_ref;
+     *head_ref = newnode;
+}
+
+void insertAfter(node* prev_node, int newdata)
+{
+    node* newNode = new node();
+    newNode->data = newdata;
+    newNode->next = prev_node->next;
+    prev_node->next = newNode;
+}
+
+int main()
+{
+
+    node* head = NULL;
+    push(&head, 5);
+    push(&head, 7);
+    push(&head, -3);
+
+    insertAfter(head->next, 79);
+
+    printList(head);
+    return 0;
+}
