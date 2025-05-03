@@ -1,0 +1,43 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class Node
+{
+public:
+    int data;
+    Node *next;
+    //Constractor
+    Node(int value)
+    {
+        data=value;
+        next = NULL;
+    }
+
+};
+//Function
+Node *CreateLinkedList(int arr[], int index, int size, Node* prev)
+{
+    if(index==size) return prev;
+    Node *Temp = new Node(arr[index]);
+    Temp->next = prev;
+    return CreateLinkedList(arr, index+1, size, Temp);
+}
+
+
+int main()
+{
+    Node *Head=NULL;
+        int arr[]={2, 4, 6, 8, 10};
+
+    //Call Function
+    Head = CreateLinkedList(arr, 0, 5, NULL);
+
+    //Print output
+    Node *Temp = Head;
+    while(Temp)
+    {
+        cout<<Temp->data<<" ";
+        Temp = Temp->next;
+    }
+    return 0;
+}
