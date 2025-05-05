@@ -40,9 +40,12 @@ for(int i=0; i<5; i++){
 }
 
 //1st delete
+if(Head!=NULL)
+{
 Node* temp = Head;
 Head=Head->next;
 delete temp;
+}
 //
 
 //output
