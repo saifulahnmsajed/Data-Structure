@@ -1,0 +1,53 @@
+#include <bits/stdc++.h>
+using namespace std;
+class Node
+{
+public:
+    int data;
+    Node* next;
+    Node* prev;
+    Node(int value)
+    {
+        data = value;
+        next = NULL;
+        prev = NULL;
+    }
+};
+int main()
+{
+    Node *Head = NULL, *Tail = NULL;
+
+    //Create Doubly Link List
+    int arr[]={1,2,3,4,5};
+    for(int i=0; i<5; i++)
+{
+    if(Head == NULL)
+    {
+        Head = new Node(arr[i]);
+        Tail = Head;
+    }else
+    {
+        Node *temp = new Node(arr[i]);
+        Tail->next = temp;
+        temp->prev = Tail;
+        Tail = temp;
+    }
+}
+
+
+    //Print
+    Node *temp_2 = Head;
+    while(temp_2)
+    {
+        cout<<temp_2->data<<" ";
+        temp_2= temp_2->next;
+    }
+    cout<<endl;
+    Node *temp_3 = Tail;
+    while(temp_3)
+    {
+        cout<<temp_3->data<<" ";
+        temp_3= temp_3->prev;
+    }
+    return 0;
+}
