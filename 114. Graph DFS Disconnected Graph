@@ -1,0 +1,57 @@
+#include <bits/stdc++.h>
+using namespace std;
+class Graph{
+    int V;
+    list<int> *l;
+public:
+    Graph(int V)
+    {
+        this->V = V;
+        l = new list<int> [V];
+    }
+    void addEdge(int u, int v)
+    {
+        l[u].push_back(v);
+        l[v].push_back(u);
+    }
+    ///DFS
+    void dfsHelper(int u, vector<bool> &visted)
+    {
+        cout<< u << " ";
+        visted[u] = true;
+        for(int v : l[u]){
+            if(!visted[v]){
+                dfsHelper(v, visted);
+            }
+        }
+    }
+
+    void dfs()
+    {
+
+        vector<bool> visted(V,false);
+        for(int i=0; i<V; i++)
+        {
+            if(!visted[i])
+            {
+                dfsHelper(i, visted);
+            }
+        }
+
+    }
+
+};
+int main()
+{
+    Graph g(7);
+
+    g.addEdge(0,1);
+    g.addEdge(1,2);
+    g.addEdge(1,3);
+    g.addEdge(2,4);
+    g.addEdge(5,6);
+
+    g.dfs();
+
+    return 0;
+}
