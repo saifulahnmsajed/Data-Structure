@@ -1,0 +1,78 @@
+#include <bits/stdc++.h>
+using namespace std;
+using pii = pair<int, int>;
+#define ff first
+#define ss second
+int n, m;
+vector<string> grid;
+
+bool isValid(int x, int y)
+{
+     return (x<n and x>=0 and y<m and y>=0 and grid[x][y] != '#');
+}
+
+int main()
+{
+    cin>>n>>m;
+    pii s,d;
+    grid = vector<string> (n);
+
+    for(int i=0; i<n; i++)
+    {
+        cin>> grid[i];
+        for(int j=0; j<m; j++)
+        {
+            if(grid[i][j]=='S') {s.ff = i; s.ss = j;}
+            if(grid[i][j]=='D') {d.ff = i; d.ss = j;}
+        }
+    }
+    int level[100][100];
+    memset(level, -1, sizeof(level));
+    //        {0,4}
+    // {1, 3} {1,4} {1,5}
+    //        {2,4}
+
+    int dx[] = {-1, 1, 0, 0};
+    int dy[] = {0, 0, -1, 1};
+    //u.first + dx[0], u.second + dy[0]
+    //u.first + dx[1],......
+
+    //u.first -1, u.second
+    //u.first +1, u.second
+    //u.first, u.second -1
+    //u.first, u.second +1
+
+
+    level[s.ff][s.ss] = 0;
+
+    queue<pii> q;
+
+    q.push(s);
+
+    while(!q.empty())
+    {
+        pii u = q.front();
+        q.pop(); // u = {1,4}
+
+        for(int k=0; k<4; k++){
+            pii v = {u.ff + dx[k], u.ss + dy[k]};
+            if(isValid(v.ff, v.ss) and level[v.ff][v.ss] == -1)
+            {
+                level[v.ff][v.ss] = level[u.ff][u.ss] + 1;
+                q.push(v);
+            }
+        }
+
+    }
+    //Print
+    for(int i=0; i<n; i++)
+    {
+        for(int j=0; j<m; j++)
+        {
+           printf("%3d", level[i][j]);
+
+        }cout<<endl;
+
+    }
+    return 0;
+}
