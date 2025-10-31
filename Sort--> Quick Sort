@@ -1,0 +1,39 @@
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int partion(vector<int> &arr, int st, int ed){
+    int idx = -1, j=0, pivot = arr[ed];
+
+    for(int j=0; j<ed; j++)
+    {
+        if(arr[j] <= pivot)
+        {
+            idx++;
+            swap(arr[idx], arr[j]);
+        }
+    }
+    idx++;
+    swap(arr[idx], arr[ed]);
+    return idx;
+
+}
+
+void QS(vector<int> &arr, int st, int ed)
+{
+    if(st<ed)
+    {
+        int pivIdx = partion(arr, st, ed);
+        QS(arr, st, pivIdx-1);
+        QS(arr, pivIdx+1, ed);
+    }
+}
+
+int main()
+{
+    vector<int> arr = {12, 31, 35, 8, 32, 17};
+    QS(arr, 0, arr.size()-1);
+
+    for(int u: arr)cout<< u<< " ";
+    return 0;
+}
