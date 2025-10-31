@@ -1,0 +1,21 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define vi vector<int>
+hS(vi &arr)
+{
+    priority_queue<int> pq;
+    for(int u : arr) pq.push(u);
+    for(int i=arr.size()-1; i>=0; i--)
+    {
+        arr[i] = pq.top();
+        pq.pop();
+    }
+}
+int main(){
+    vi arr = {4,10,3,5,1};
+    hS(arr);
+    for(auto u : arr) cout<< u << " ";
+    cout<<endl;
+
+return 0;
+}
